@@ -1,0 +1,17 @@
+# My First Repository
+
+このリポジトリは、WSL（Ubuntu）と VS Code を使った開発環境構築の練習用として作成しました。  
+GitHub の基本操作（clone / commit / push）を確認するための初期プロジェクトです。
+
+## 📌 Purpose
+- GitHub の基本操作を習得する
+- WSL × VS Code の開発環境を整備する
+- 今後の技術ブログ記事の管理基盤として利用する
+
+## 🛠 Tech Stack
+- WSL2 (Ubuntu)
+- Visual Studio Code (WSL Remote)
+- Git / GitHub
+- Shell Script / Python（予定）
+
+## 📁 Directory
