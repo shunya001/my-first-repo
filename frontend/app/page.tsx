@@ -1,22 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  const [message, setMessage] = useState("loading...");
+  const [text, setText] = useState("");
+  const [result, setResult] = useState("");
 
-  useEffect(() => {
-    fetch("http://localhost:8000")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage("API error"));
-  }, []);
+  const sendToAPI = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/echo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      const data = await res.json();
+      setResult(data.received);
+    } catch (error) {
+      setResult("API error");
+    }
+  };
 
   return (
-    <main style={{ padding: "40px", fontSize: "24px" }}>
-      <h1>Next.js + FastAPI</h1>
-      <p>API Response: {message}</p>
+    <main style={{ padding: "40px", fontSize: "20px" }}>
+      <h1>Next.js + FastAPI POST</h1>
+
+      <div style={{ marginTop: "20px" }}>
+        <input
+          type="text"
+          placeholder="文字を入力"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            width: "300px",
+            marginRight: "10px",
+          }}
+        />
+
+        <button
+          onClick={sendToAPI}
+          style={{
+            padding: "10px 20px",
+            fontSize: "18px",
+            cursor: "pointer",
+          }}
+        >
+          送信
+        </button>
+      </div>
+
+      <p style={{ marginTop: "20px" }}>API Response: {result}</p>
     </main>
   );
 }
-
